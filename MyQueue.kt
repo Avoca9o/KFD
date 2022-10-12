@@ -15,6 +15,11 @@ class MyQueue<T> {
         if (start == end) {
             throw Exception("Exception: You can't pop elements from an empty queue")
         }
+        if (start > 100000) {
+            base = base.drop(100000).toMutableList()
+            start = 0
+            end -= 100000
+        }
         return base[start++]
     }
 
@@ -23,7 +28,9 @@ class MyQueue<T> {
     }
 
     fun clear() {
-        start = end
+        base = mutableListOf()
+        start = 0
+        end = 0
         println("queue cleared")
     }
 
